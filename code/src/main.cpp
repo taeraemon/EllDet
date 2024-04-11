@@ -14,7 +14,7 @@ int main()
 	auto start = clock();
 	EllipseDetector ellipse_Detector;
 	std::vector<Ellipse> ellipses;
-	cv::Mat img = cv::imread(R"(F:\projects\code_online\a.jpg)");
+	cv::Mat img = cv::imread(R"(/home/tykim/Documents/project_cpp/EllDet/code/a.jpg)");
 	ellipses = ellipse_Detector.DetectImage(img);
 	cv::Mat3b img0 = ellipse_Detector.image();
 	draw_ellipses_all(ellipses, img0);
