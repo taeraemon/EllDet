@@ -496,7 +496,7 @@ void EllipseDetector::Preprocess()
 }
 
 void printVVP(const VVP& vvp) {
-	printf("%d", vvp.size());
+	printf("%ld", vvp.size());
     for (size_t i = 0; i < vvp.size(); ++i) {
         std::cout << "Polygon " << i << ":" << std::endl;
         for (size_t j = 0; j < vvp[i].size(); ++j) {
