@@ -467,10 +467,10 @@ void EllipseDetector::BuildDigraph()
 
 				double diff = info_.angles[i] - info_.angles[j];
 
-				//auto tmp3 = info_.original_img.clone();
-				//drawVVP(tmp3, { info_.arcs[i],info_.arcs[j] }, 2, 0, 1);
-				//imshow("pair", tmp3);
-				//waitKey();
+				// auto tmp3 = info_.original_img.clone();
+				// drawVVP(tmp3, { info_.arcs[i],info_.arcs[j] }, 2, 0, 1);
+				// imshow("pair", tmp3);
+				// waitKey();
 
 				if (diff < 0)
 					diff += CV_PI*2;
@@ -495,10 +495,21 @@ void EllipseDetector::Preprocess()
 	GaussianBlur(info_.gray_blured_img, info_.gray_blured_img,Size(3,3),1.0);
 }
 
+void printVVP(const VVP& vvp) {
+	printf("%d", vvp.size());
+    for (size_t i = 0; i < vvp.size(); ++i) {
+        std::cout << "Polygon " << i << ":" << std::endl;
+        for (size_t j = 0; j < vvp[i].size(); ++j) {
+            std::cout << "Point(" << vvp[i][j].x << ", " << vvp[i][j].y << ")" << std::endl;
+        }
+    }
+}
+
 void EllipseDetector::DetectEdge()
 {
 	EdgeDetector edge_Detector;
 	info_.direction_mat = edge_Detector.Canny(info_.gray_blured_img, info_.curves, info_.edge_map, min_length_);
+	// printVVP(info_.curves);
 }
 
 std::vector<Ellipse> EllipseDetector::DetectImage(const Mat3b& image)
