@@ -63,6 +63,7 @@ void Collecting(Mat1b& image,VVP& segments, int min_length)
 	// }
 
 	auto vis=image.clone();
+	// imshow("vis", vis);
 	for(int y=0;y < vis.rows;y++)
 	{
 		for(int x=0;x<vis.cols;x++)
@@ -96,6 +97,24 @@ void Collecting(Mat1b& image,VVP& segments, int min_length)
 		}
 	}
 
+}
+
+void showMat2fImage(cv::Mat2f &src) {
+    std::vector<cv::Mat> channels(2);
+    // Channel split
+    cv::split(src, channels);
+
+    for (size_t i = 0; i < channels.size(); ++i) {
+		// Data range adjust and type conversion
+        cv::Mat normalized, displayable;
+        cv::normalize(channels[i], normalized, 0, 255, cv::NORM_MINMAX);
+        normalized.convertTo(displayable, CV_8U);
+
+        // Channel show
+        cv::imshow("Channel " + std::to_string(i), displayable);
+    }
+
+    cv::waitKey(0);
 }
 
 cv::Mat2f EdgeDetector::Canny(Mat1b image, VVP& edge_vector, Mat1b& edge_map, int min_length)
